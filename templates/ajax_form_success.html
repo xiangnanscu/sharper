@@ -1,0 +1,10 @@
+{% import 'macros.html' as macro %}
+{{ macro.show_comments(items,user) }}
+
+{% if form is defined %}
+
+<form action="{{url}}" method="post">
+	{{ form.as_p() }} 
+	<input type="submit" value="提交">
+</form>
+{% endif %}

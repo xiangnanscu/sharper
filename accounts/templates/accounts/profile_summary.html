@@ -1,0 +1,70 @@
+
+
+<div class="row">
+    <div id="user-panel-answers" class="col-sm-12 col-md-6">
+        <div class="sorted-title">
+            <h4>
+                <a href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'answers'}) }}#tab-top">
+                    <span class="count">{{ profile_answers|length }}</span>个回答
+                </a>
+            </h4>
+            <div class="tabs">
+                <a href="javascript:void(0)" class="youarehere" data-sort-id='votes'>
+                    认可           
+                </a>
+                <a href="javascript:void(0)" data-sort-id="activity">
+                    活跃            
+                </a>
+                <a href="javascript:void(0)" data-sort-id="newest">
+                    最新            
+                </a>
+            </div>
+        </div> 
+        <div class="user-panel-content">
+            <ul>
+				{% for answer in profile_answers[:5] %}
+			   <a class="list-group-item border-none" title="{{ answer.hoster.title }}" href="{{ url('questions:QuestionDetail',kwargs={'pk':answer.hoster.pk}) }}#answer-{{ answer.pk }}" class="answer-hyperlink ">{{ answer.hoster.title[:63] }} <span class="badge">{{ answer.score }}</span></a>
+				{% endfor%}
+				{% if profile_answers[5:] %}
+				<a class="list-group-item border-none" href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'answers'}) }}#tab-top">更多</a>
+				{% endif %}
+			</ul>
+		</div>
+    </div>
+
+
+    <div id="user-panel-questions" class="col-sm-12 col-md-6">
+        <div class="sorted-title">
+            <h4>
+                <a href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'questions'}) }}#tab-top">
+                    <span class="count">{{ profile_questions|length }}</span>个提问
+                </a>
+            </h4>
+
+            <div class="tabs">
+                <a href="javascript:void(0)" class="youarehere" data-sort-id='votes'>
+                    关注           
+                </a>
+                <a href="javascript:void(0)" data-sort-id="activity">
+                    活跃            
+                </a>
+                <a href="javascript:void(0)" data-sort-id="newest">
+                    最新            
+                </a>
+            </div>
+        </div>
+
+        <div class="user-panel-content">
+			<ul class="list-group">
+			{% for question in profile_questions[:5] %}
+				
+				<a class="list-group-item border-none" href="{{ url('questions:QuestionDetail',kwargs={'pk':question.pk}) }}" title="{{ question.title }}">{{ question.title[:63] }}...<span class="badge">{{ question.score }}</span></a>
+			{% endfor %}
+			{% if profile_questions[5:] %}
+				<a class="list-group-item border-none" href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'questions'}) }}#tab-top">更多</a>
+           {% endif %}
+			</ul>
+        </div>
+
+    </div>
+</div>

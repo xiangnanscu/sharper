@@ -1,0 +1,74 @@
+{% import 'macros.html' as macro %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="{{ STATIC_URL }}css/sharp.css" rel="stylesheet" type="text/css">
+  <!-- <link href="{{ STATIC_URL }}fa/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}css/pure.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/static/images/logo.png">
+</head>
+
+<body>
+  <div id="nav">
+    <ul>
+      <li><a href="{{ url('questions:QuestionList') }}" title="">
+        问答
+      </a></li>
+      <li><a href="{{ url('topics:TopicList') }}" title="">
+        论坛
+      </a></li>
+      <li><a href="#" title="">
+        博客
+      </a></li>
+      {% if user.is_authenticated() %}
+      <li><a href="{{ url('accounts:profile',args=[user.pk]) }}" title="">
+        {{ user }}
+      </a></li>
+      <li><a href="{{ url('accounts:logout') }}" title="">
+        注销
+      </a></li>
+      {% else %}
+      <li><a href="{{ url('accounts:login') }}" title="">
+        登录
+      </a></li>
+      <li><a href="{{ url('accounts:register') }}" title="">
+        注册
+      </a></li>
+      {% endif %}
+    </ul>
+  </div>
+  <div id="container">
+    <div id="header">
+      {% block header %}{% endblock %}
+    </div>
+    <div id='content'>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <div id="footer">
+    <ul>
+      <li><a href="#" title="">
+        联系我们
+      </a></li>
+      <li><a href="#" title="">
+        关于sharp
+      </a></li>
+    </ul>
+  </div>
+  <script src="{{ STATIC_URL }}js/jquery-1.11.0.min.js"></script>
+  <!-- 次序不能乱,button必须在min之后 button.js的名称也不能改 -->
+  <script src="{{ STATIC_URL }}js/button.js"></script> 
+
+  <!-- <script src="{{ STATIC_URL }}js/sharp.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}js/ajaxform.js"></script>  
+  <script src="{{ STATIC_URL }}js/info.post.js"></script>-->
+  <script>
+    $(document).ready(function() {
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{%extends 'tr_home.html'%}
+{%block mainbar%}
+
+<form method="post">{{ csrf_token|csrf }}
+	{{ form.as_p() }}
+	<input type="submit" value="提交" />
+</form>
+
+{%endblock%}

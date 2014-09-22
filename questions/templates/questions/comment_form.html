@@ -1,0 +1,14 @@
+
+
+{%extends 'qa_home.html'%}
+
+{%block mainbar%}
+<form action="{{url('questions:CommentCreate',kwargs={'hoster_pk':view.kwargs['hoster_pk']})}}" method="post">{{ csrf_token|csrf }}
+	{{ form.as_p() }}
+	<input type="submit" value="提交" />
+</form>
+{%endblock%}
+
+{%block sidebar%}
+右边框
+{%endblock%}

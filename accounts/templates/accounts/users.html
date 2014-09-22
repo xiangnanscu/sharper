@@ -1,0 +1,69 @@
+{% import 'macros.html' as macro %}
+
+{% extends "home_questions.html" %}
+
+
+
+
+
+
+
+{% block content %}
+
+<div class="col-sm-12 col-md-10">
+<div class="row">
+    <div class="sorted-title">
+        <h3 id="h-users">用户</h3>
+        <div class="tabs">
+            <a {% if tab == 'reputation' %}class="youarehere"{% endif %} href="{{ url('users:users_tab',args=('reputation',1)) }}" title="最高声望用户">声望</a>
+            <a {% if tab == 'newusers' %}class="youarehere"{% endif %} href="{{ url('users:users_tab',args=('newusers',1)) }}" title="最近加入的用户">新用户</a>
+        </div>
+    </div>
+
+    
+    <div class="page-description">
+	<form class="form-inline" role="form">
+			<span>
+            欢迎更多的成员加入
+			</span>
+		    <div class="form-group pull-right">
+				<label class="sr-only" for="userfilter">查找标签</label>
+				<input class="form-control input-sm"  id="userfilter" name="userfilter" type="text" placeholder="查询成员">
+				<button type="submit" class="btn btn-default btn-sm">提交</button>
+		    </div>
+		    
+		</form>
+    </div>
+
+    <div class="">
+
+		{% for row_items in users_list %}
+		<div class="row">
+			{% for user in row_items %}
+				<div class="col-sm-6 col-md-3 user-info  user-hover">
+					<div class="user-gravatar48">
+						<a href="{{ user.url }}"><div class="gravatar-wrapper-48"><img src="{{ user.avatar_url }}" alt=""></div></a>
+					</div>
+					<div class="user-details">
+						<a href="{{ user.url }}">{{user}}</a><br>
+						<span class="user-location">{{user.location}}</span><br>
+						<span class="reputation-score" title="声望" dir="ltr">{{ user.reputation }}</span>
+					</div>
+					<div class="user-tags">
+							<!-- 该用户擅长tags -->
+						</div>
+				</div>
+			{% endfor %}
+		</div>
+		{% endfor %}
+
+        <div class="pager fr">
+            {{ macro.paginatior(viewname,page,page_list,pagination_kwargs) }}
+        </div>
+    </div>
+
+	</div>
+
+</div>
+
+{% endblock %}

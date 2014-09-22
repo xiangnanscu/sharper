@@ -1,0 +1,31 @@
+{%extends  'home.html'%}
+
+{%block  header  %}
+
+<div  class="tabs-wrapper">
+  <div  class="tabs">
+    <a  href="{{url('questions:QuestionCreate')}}"  title="">
+      提问
+    </a>
+    <a  class="youarehere" href="{{url('questions:QuestionList')}}"  title="">
+      所有问题
+    </a>
+    <a  href="#"  title="">
+      所有用户
+    </a>
+    <a  href="#"  title="">
+      所有标签
+    </a>
+  </div>
+</div>
+
+{%endblock%}
+
+{%block  content%}
+<div  id='mainbar'>
+  {%  block  mainbar  %}{%  endblock  %}
+</div>
+<div  id='sidebar'>
+  {%  block  sidebar  %}{%  endblock  %}
+</div>
+{%endblock%}

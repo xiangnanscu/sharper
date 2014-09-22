@@ -1,0 +1,38 @@
+{% import 'macros.html' as macro %}
+
+
+<div id="user-tab-questions" class="user-tab">
+    <div class="sorted-title">
+        <h4>
+            <span class="count">{{ profile_questions|length }}</span>个提问
+        </h4>
+        <div class="tabs">
+            <a {% if sort == 'newest' %}class="youarehere"{% endif %} href="{{ url('users:profile_tab_sort',args=(user_pk,tab,'newest',)) }}#tab-top">
+                最新                    
+            </a>
+            <a {% if sort == 'active' %}class="youarehere"{% endif %} href="{{ url('users:profile_tab_sort',args=(user_pk,tab,'active',)) }}#tab-top">
+                活动                    
+            </a>
+            <a {% if sort == 'votes' %}class="youarehere"{% endif %} href="{{ url('users:profile_tab_sort',args=(user_pk,tab,'votes',)) }}#tab-top">
+                票数                    
+            </a>
+            <a {% if sort == 'views' %}class="youarehere"{% endif %} href="{{ url('users:profile_tab_sort',args=(user_pk,tab,'views',)) }}#tab-top">
+                次数                    
+            </a>
+        </div>
+    </div>
+
+    <div class="user-tab-content">
+        <div class="user-questions">
+            {% for question in item_list %}
+            {% include "questions/question_summary.html" %}
+            {% endfor %}
+
+        </div>
+		<div class="pull-right">
+		{{ macro.paginatior(viewname,page,page_list,pagination_kwargs,anchor) }}
+		</div>
+    </div>
+
+
+</div>

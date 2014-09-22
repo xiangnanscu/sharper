@@ -1,0 +1,704 @@
+
+body {
+	background: #FFFFFF;
+	color: #000;
+	font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+	font-size: 80%;
+	line-height: 1;
+	display: block;
+	margin: 0;
+}
+
+input[type="submit"] {background-color:#fff;
+	border:1px solid #8e8e8e;
+	color:#8e8e8e;
+}
+label {
+	display:inline;
+}
+textarea { 
+	/*这个是为了把IE丑陋的默认边框消除*/
+	outline: none;
+	/*border-style: none; */
+	border-color: #8E8E8E; 
+	margin-top: 2px;
+	margin-bottom: 2px;
+	overflow: auto;        
+}
+
+a {
+	/*color: #0077cc;*/
+	text-decoration: none;
+	cursor: pointer;
+}
+
+html, body, div, a,{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+#nav {
+	height: 28px;
+	width: 100%;
+	color: #d5d5d5;
+	background-color: #545652;
+}
+
+#nav a{
+	color: #FFFFFF;
+}
+
+#sub-nav {
+	height: 28px;
+	width: 100%;
+	color: #d5d5d5;
+	background-color: #545652;
+}
+
+#footer {
+	height: 100px;
+	width: 100%;
+	color: #d5d5d5;
+	background-color: #545652;
+	clear: both; /*不明觉厉,这个属性可以保证footer在页面最下面*/
+	text-align: center;
+}
+
+#footer a{
+	color: #FFFFFF;
+}
+
+#container {
+	min-height: 900px;
+	width: 100%;
+	text-align: left;
+	zoom: 1;
+}
+
+#header {
+	height: 100px;
+	width: 980px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+
+}
+
+#content {
+	min-height: 500px;
+	width: 980px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+#mainbar {
+	min-height: 500px;
+	width: 750px;
+	float: left;
+	margin-bottom: 40px;
+}
+
+#sidebar {
+	min-height: 500px;
+	width: 220px;
+	overflow: hide;
+	float: right;
+	margin-bottom: 40px;
+	/*background-color: #8E8E8E; *//*仅供显示,随时可以删除*/
+}
+
+.post-taglist {
+	margin-bottom: 10px;
+	clear: both;
+}
+
+.post-tag, .post-text .post-tag, .wmd-preview a.post-tag {
+/*color: #3e6d8e;
+background-color: #e0eaf1;
+border-bottom: 1px solid #b3cee1;
+border-right: 1px solid #b3cee1;*/
+color: #FFFFFF;
+background-color: #8E8E8E;
+border-bottom: 1px solid #FFFFFF;
+border-right: 1px solid #FFFFFF;
+padding: 3px 4px 3px 4px;
+margin: 10px 2px 2px 0;
+text-decoration: none;
+font-size: 90%;
+line-height: 1.4;
+white-space: nowrap;
+display: inline-block;
+}
+
+ul {
+	padding:0;
+	margin:0;
+	float:left;
+}
+
+li {
+	overflow:hide;
+	list-style:none;
+	float:left;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.pager {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.page-sizer {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+.page-numbers {
+font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+border: 1px solid #ccc;
+color: #8E8E8E;
+display: block;
+float: left;
+font-size: 13px;
+margin-right: 3px;
+padding: 3px 6px 3px 6px;
+text-decoration: none;
+}
+
+.page-numbers.current {
+background-color: #8E8E8E;
+border: 1px solid #8E8E8E;
+color: #fff;
+font-weight: bold;
+}
+
+.page-numbers.dots {
+border: 1px solid #fff;
+}
+
+.page-numbers.next, .page-numbers.prev {
+border: 1px solid #fff;
+}
+
+
+.tabs-wrapper {
+	/*这个是水平基准线*/
+	border-bottom: 1px solid #8E8E8E;
+	height: 34px; /*这个高度是根据其他元素的高度计算出来的,不能单独更改*/
+	clear: both;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.tabs {
+	float: right;
+	font-weight: normal;
+
+}
+
+.tabs-info{
+	float: left;
+	height: 35px;	
+}
+
+.tabs-info h2{
+	margin: 9px 8px 0 0;
+	padding: 0 11px 0 11px;
+}
+
+.tabs a:hover{
+	background:#FFFFFF;
+	/*这个是鼠标悬停其他选项卡区域时边框的颜色*/
+	border:1px solid #8E8E8E;
+	border-bottom-color:#FFFFFF;
+}
+
+.tabs a {
+	color: #8E8E8E;
+	border: 1px solid transparent;
+	border-bottom-color: #8E8E8E;
+	background: inherit;
+	display: block;
+	float: left;
+	text-decoration: none;
+	font-size: 90%;
+	height: 24px;
+	line-height: 20px;
+	margin: 9px 8px 0 0;
+	padding: 0 11px 0 11px;
+}
+
+.tabs a.youarehere {
+	color: #000000;
+	border: 1px solid #8E8E8E;
+	border-bottom-color: #FFFFFF;/*必须是#FFFFFF,不能是透明色.否则显示tabs-wrapper的边框颜色*/
+	background: inherit;
+	font-size: 120%;
+	height: 30px;
+	line-height: 28px;
+	margin-top: 3px;
+	padding: 0px 11px 0px 11px;
+}
+
+.solid-line{
+	border-bottom: solid;
+	border-color: #ADADAD;
+	border-width: 1px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+	width: 100%;
+	float:left;
+}
+
+.dashed-line{
+	border-bottom: dashed;
+	border-color: #ADADAD;
+	border-width: 1px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+	width: 100%;
+	float:left;
+/*	border-color: #ADADAD;
+	border-width: 1px;
+	width: 100%;
+	padding: 0;
+	margin: 0;*/
+}
+
+.post-container{
+	min-height: 190px;
+	width:750px;
+	background: #FFFFFF;
+	margin-bottom: 15px;
+}
+
+.post-title {
+	min-height: 30px;
+	width:100%;
+	float:left;
+	font-size: 20px;
+}
+
+.post-left {
+	min-height:150px;
+	width:60px;
+	float:left;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+
+.post-middle {
+	min-height: 150px;
+	width:545px;
+	float:left;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.post-right {
+	min-height: 150px;
+	width:85px;
+	float:left;
+	color: #8E8E8E;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+.post-vote {
+	height:24px;
+	width:64px;
+	background: #FFFFFF;	
+	float:left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.post-favor {
+	height:32px;
+	width:64px;
+	background: #FFFFFF;	
+	float:left;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.vote-num {
+	font-size: 24px;
+	text-align: center;
+	color: #8E8E8E;
+	font-weight:bold;
+}
+
+.favor-num {
+	font-size: 12px;
+	text-align: center;
+	color: #8E8E8E;
+	font-weight:bold;
+}
+
+.post-content {
+	min-height: 100px;
+	width:545px;
+	float:left;
+	line-height:20px;
+}
+
+.post-tags {
+	height: 30px;
+	width:555px;
+	float:left;
+	margin-top: 3px;
+}
+
+.comments {
+	min-height: 30px;
+	width:100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-top:dotted;
+	border-top-color: #D0D0D0;
+	border-width: 1px;
+	color: #444;
+	float: left;
+}
+
+.comments a{
+	color: #8E8E8E;
+}
+
+.comments-content{
+	border-bottom:dotted;
+	border-bottom-color: #D0D0D0;
+	border-width: 1px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	line-height:20px;
+} 
+
+.comments-content a{
+	padding-left: 10px;
+	
+} 
+
+.comment-update {
+	visibility: hidden;
+}
+.post-textarea{
+	width: 100%;
+	border:solid 1px #8E8E8E; 
+}
+
+.post-submit{
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+	border:1px solid #8E8E8E;
+	font-size: 120%;
+	background-color: transparent;
+	color: #444;
+	cursor: pointer;
+	text-align: center;
+	margin-top: 3px;
+}
+
+.comment-create {
+	visibility: hidden;
+	font-size: 15px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	height:24px;
+	float: right;
+	line-height:24px;
+	color: #8E8E8E;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.comment-create :hover{
+	color: #FF8000;
+}
+
+.comment-update :hover{
+	color: #FF8000;
+}
+.comment-create-rest {
+	visibility: hidden;
+	font-size: 15px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	height:24px;
+	float: right;
+	line-height:24px;
+	color: #8E8E8E;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.comment-create-rest:hover{
+	color: #FF8000;
+}
+.comments-show {
+	visibility: hidden;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	height:24px;
+	float: right;
+	line-height:24px;
+	color: #8E8E8E;
+	cursor: pointer;
+	margin-right: 20px;
+}
+.comments-show:hover{
+	color: #FF8000;
+}
+.comments-hide {
+	visibility: hidden;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	height:24px;
+	float: right;
+	line-height:24px;
+	color: #8E8E8E;
+	cursor: pointer;
+	margin-right: 20px;
+}
+.comments-hide:hover{
+	color: #FF8000;
+}
+
+.post-action{
+	font-size: 15px;
+	height: 30px;
+	/*width:555px;*/
+	width:100%;
+	float:right;
+	margin-top: 10px;
+}
+.post-action a:hover{
+	color: #FF8000;
+}
+
+.post-container:hover a{
+	visibility:inherit;
+}
+
+.post-action a{
+	visibility: hidden;
+	color: #8E8E8E;
+	padding-right: 10px;
+}
+
+.post-action .sep{
+	color: #8E8E8E;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+
+.post-avatar {
+	background: #FFFFFF;
+	/*	float:left;*/
+	margin-left: 0px;
+	/*	margin-right: 6px;*/
+}
+
+.post-avatar a{
+	color:transparent;
+}
+
+.post-username {
+	background: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 3px;
+}
+
+.post-username a{
+	color: #8E8E8E;
+}
+
+.post-reputation {
+	background: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 3px;
+	color: #000;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.post-time {
+	background: #FFFFFF;
+	margin-left: 0px;
+	margin-top: 3px;
+}
+
+.post-time span{
+	color: #8E8E8E;
+}
+
+.vote-up-on{
+	font-size: 24px;
+	color: #FF8000;
+	text-align: center;
+	margin-top: 1px;
+	margin-bottom: 0px;
+	padding:0;
+	cursor: pointer;
+}
+
+.vote-up-off{
+	font-size: 24px;
+	color: #8E8E8E;
+	text-align: center;
+	margin-top: 1px;
+	margin-bottom: 0px;
+	cursor: pointer;
+}
+.vote-up-off:hover{
+	color: #FF8000;
+}
+.vote-down-on{
+	font-size: 24px;
+	color: #FF8000;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 3px;
+	cursor: pointer;
+}
+
+.vote-down-off{
+	font-size: 24px;
+	color: #8E8E8E;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 3px;
+	cursor: pointer;
+}
+.vote-down-off:hover{
+	color: #FF8000;
+}
+.favor-on{
+	font-size: 24px;
+	color: #FF8000;
+	text-align: center;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+
+.favor-off{
+	font-size: 24px;
+	color: #8E8E8E;
+	text-align: center;
+	margin-top: 5px;
+	cursor: pointer;
+}
+.favor-off:hover{
+	color: #FF8000;
+}
+.accept-on{
+	font-size: 24px;
+	color: #00BB00;
+	text-align: center;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.accept-off{
+	font-size: 24px;
+	color: #8E8E8E;
+	text-align: center;
+	margin-top: 5px;
+	cursor: pointer;
+}
+.accept-off:hover{
+	color: #FF8000;
+}
+
+.post-list {
+	border-bottom: 1px solid #8E8E8E;
+	height: 34px;
+	line-height: 34px; /*和height相同,则元素就居中了*/
+	margin-top: 5px;
+	clear: both;
+}
+
+.post-list .vote-num{
+	float: left;
+	width: 60px;
+	height: 34px; 
+	margin-right: 12px;
+	background: #8E8E8E;
+	font-size: 20px;
+	text-align: center;
+	color: #fff;
+	font-weight:bold;
+}
+
+.post-list .re-num{
+	float: left;
+	width: 60px;
+	height: 34px; 
+	margin-right: 12px;
+	background: transparent;
+	font-size: 20px;
+	text-align: center;
+	color: #8E8E8E;
+}
+
+.post-list .favor-num{
+	float: left;
+	width: 60px;
+	height: 34px; 
+	margin-right: 12px;
+	background: #8E8E8E;
+	font-size: 20px;
+	text-align: center;
+	color: #fff;
+}
+
+.post-list .title{
+	float: left;
+	height: 34px; 
+	background: transparent;
+	font-size: 16px;
+	color: #fff;
+}
+
+.post-list a{
+	color: #000;
+}
+
+.post-list .author{
+	float: right;
+	height: 34px; 
+	background: transparent;
+	color: #fff;
+}

@@ -1,0 +1,22 @@
+{% extends "home_questions.html" %}
+
+
+{% block content %}
+
+<div class="col-sm-12 col-md-8">
+    <h1 id="user-displayname"><a href="{{ request_user.url }}">{{ request_user }}</a> &gt; 编辑</h1>
+    <div class="row" id="profile-edit">
+		<div class="col-sm-2 gravatar-wrapper-128">
+			<img src="{{ request_user.avatar_url }}" alt="" class="main-image">
+		</div>
+		<div class="col-sm-10">
+			<form id="user-edit-form" enctype="multipart/form-data" action="" method="post">{{ csrf_token|csrf }}
+				{%include "base_form.html"%}
+				<input type="submit" value="提交" />
+
+			</form>
+		</div>
+    </div>
+</div>
+
+{% endblock %}

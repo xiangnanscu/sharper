@@ -1,0 +1,153 @@
+{% macro show_comments(comments,user) -%} 
+{% for comment in comments %}
+{% set app_label,model_name,pk = comment.address.split('-') %}
+<div class="comments-content">
+	<div id="{{comment.anchor}}"></div>
+	<span>{{comment.content}}</span>
+	<a href="#">{{comment.creater}}</a>
+
+	<a><span>{{comment.create_time|naturaltime}}</span></a>
+
+	{% if user==comment.creater %}
+	<a class="comment-update" href="{{url('%s:CommentUpdate'%(app_label),args=[pk])}}"><i class="fa fa-edit"></i></a>
+	{% endif %}
+
+</div>
+{% endfor %}
+{%- endmacro %} 
+
+
+{% macro accept_div(answer,user) -%} 
+{% set name=answer.address %}
+{% if user.is_anonymous() %}
+{% if answer.pk == answer.hoster.accept_pk %}
+<div name="{{name}}" class="accept-on"><i class="fa fa-check"></i></div>
+{% endif %}
+{% elif user == answer.hoster.creater %}
+{% if answer.pk == answer.hoster.accept_pk %}
+<div name="{{name}}" class="accept-on"><i class="fa fa-check"></i></div>
+{% elif answer.hoster.accept_pk == 0 %}
+<div name="{{name}}" class="accept-off"><i class="fa fa-check"></i></div>
+{% endif %}
+{% else %}
+{% if answer.pk == answer.hoster.accept_pk %}
+<div name="{{name}}" class="accept-on"><i class="fa fa-check"></i></div>
+{% endif %}	
+{% endif %}
+{%- endmacro %} 
+
+
+{% macro avatar(user, size='32', item=None, action='') -%} 
+<div class="pull-right user-info ">
+	{% if item %}
+	<div class="user-action-time">
+		<span title="{{action}}于{{item.create_time|strftime}}" >{{item.create_time|naturaltime}}</span>
+	</div>
+	{% endif %}
+	<div class="user-gravatar{{size}}">
+		<a href="{{user.url}}"><img src="{{user.avatar_url}}" width="{{size}}" height="{{size}}" title="{{user.description}}"/></a>
+	</div>
+	<div class="user-details">
+		<a href="{{user.url}}">{{user}}</a><br>
+		<span class="reputation-score" title="声望" dir="ltr">{{user.reputation}}</span>
+	</div>
+</div> 
+{%- endmacro %} 
+
+
+{% macro paginatior(viewname,page,page_list,kwargs={},query=None,anchor=None) -%} 
+<div class="pager fr">
+	{% for eachpage in page_list %}
+	{% if eachpage == 'prev' %}
+	<a href="{{url(viewname, kwargs=kwargs)}}{% if query %}?{{query}}&page={{page-1}}{% endif %}{% if anchor %}#{{anchor}}{% endif %}" title="第{{page-1}}页"> <span class='page-numbers prev'>上一页</span> </a> {% elif eachpage == 'next' %}
+	<a href="{{url(viewname, kwargs=kwargs)}}{% if query %}?{{query}}&page={{page+1}}{% endif %}{% if anchor %}#{{anchor}}{% endif %}" title="第{{page+1}}页"><span class='page-numbers next'>下一页</span> </a>  
+	{% elif eachpage == page|string %}
+	<span class='page-numbers current'>{{page}}</span>
+	{% elif eachpage.0 in '0123456789' %}
+	<a href="{{url(viewname, kwargs=kwargs)}}{% if query %}?{{query}}&page={{eachpage}}{% endif %}{% if anchor %}#{{anchor}}{% endif %}"> <span class='page-numbers'>{{eachpage}}</span> </a>
+	{% else %}
+	<span class='page-numbers dots'>…</span>
+	{% endif %}
+	{% endfor %}
+</div>
+{%- endmacro %}
+
+
+
+{% macro show_postitem(postitem,user) -%} 
+{% set post_adress = postitem.address %}
+{% set app_label,model_name = post_adress.split('-')[:2] %}
+
+<div id="{{post_adress}}" class="post-container">
+	{% if model_name in ('question','blog','topic') %}
+	<div class="post-title">{{postitem.title}}</div>
+	<div class="solid-line"></div>
+	{% else %}
+	<a name="{{postitem.anchor}}"></a>
+	{% endif %}
+	<div class="post-left">
+		{% set voteup,votedown = postitem.get_vote_mark(user) %}
+		<div name="{{post_adress}}" class="{{voteup}}"><i class="fa fa-chevron-up"></i></div> 
+		<div class="vote-num">{{postitem.vote_sum}}</div>
+		<div name="{{post_adress}}" class="{{votedown}}"><i class="fa fa-chevron-down"></i></div>
+		{% if model_name == 'answer' %}
+		{{accept_div(postitem,user)}}
+		{% endif %}
+		<div name="{{post_adress}}" class="{{postitem.get_favor_mark(user)}}"><i class="fa fa-star"></i></div>
+		<div class="favor-num">{{postitem.favor_count}}</div>
+	</div>
+
+	<div class="post-middle">
+		<div class="post-content"><pre>{{postitem.content|e}}</pre></div>
+		{% if model_name in ('question','blog','topic') %}
+		<div class="post-taglist">
+			{% for tag in postitem.tags.all() %}
+			<a class="post-tag" href="{{url('%ss:%sList'%(model_name,model_name.capitalize()))}}?tag={{tag.name}}">{{tag.name}}</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+		<div class="post-action">
+			{% if model_name == 'question' %}
+			<a class="re-create" href="{{url('answers:AnswerCreate',args=[postitem.pk])}}"><i class="fa fa-reply"></i></a>
+			{% elif model_name == 'topic' %}
+			<a class="re-create" href="{{url('replys:ReplyCreate',args=[postitem.pk])}}"><i class="fa fa-reply"></i></a>
+			{% endif %}
+			{% if user==postitem.creater%}
+			<a class="re-update{% if model_name in ('question','blog','topic') %}-noajax{% endif %}" href="{{url('%s:%sUpdate'%(app_label,model_name.capitalize()),args=[postitem.pk])}}"><i class="fa fa-edit"></i></a>
+			{% endif %}
+			<a href="#"><i class="fa fa-share"></i></a>
+			<a href="#"><i class="fa fa-flag"></i></a>
+		</div>
+		<div class="comments">
+			{% set comments = postitem.comment_set.all() %}
+			{{show_comments(comments[:5],user)}}
+			{% if comments[5:].exists() %}
+			<a class="comment-create-rest" href="{{url('%s:%sCreate'%(app_label,'Comment'),args=[postitem.pk])}}"><i class="fa fa-comments"></i></a>
+			{% else %}
+			<a class="comment-create" href="{{url('%s:%sCreate'%(app_label,'Comment'),args=[postitem.pk])}}"><i class="fa fa-comment"></i></a>
+			{% endif %}
+			{% if comments.exists() %}
+			<a class="comments-hide"><i class="fa fa-folder-open"></i></a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="post-right">
+		<div class="post-avatar">
+			<a href="#"><img src="{{postitem.creater.avatar_url}} " width="48" height="48"/></a>
+		</div>
+		<div class="post-username">
+			<a href="#">{{postitem.creater}}</a>
+		</div>
+		<div class="post-reputation">
+			{{postitem.creater.reputation}}
+		</div>
+		<div class="post-time">
+			<span>{{postitem.edit_time|naturaltime}}</span>
+		</div>
+	</div>
+	{% if model_name not in ('question','blog','topic') %}
+	<div class="solid-line"></div>
+	{% endif %}
+</div>
+
+{%- endmacro %} 

@@ -1,0 +1,58 @@
+{%extends 'qa_home.html'%}
+{% import 'macros.html' as macro %}
+
+{%block mainbar%}
+ 
+<div  class="tabs-wrapper">
+  <div  class="tabs">
+	{% set querys=view.get_query_string(False,'page','sort')%}
+	{% set qurl=url('questions:QuestionList')%}
+	{% set csort=view.get_sort()%}
+		<a {% if csort=='votes'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=votes"  title="">
+			票数
+		</a>
+		<a  {% if csort=='newest'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=newest"  title="">
+			最新
+		</a>
+		<a  {% if csort=='active'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=active"  title="">
+			活动
+		</a>
+  </div>
+</div>
+
+{% for question in object_list %}
+<div class="post-list">
+
+	<div class="vote-num">
+		<i class="fa fa-sort"></i>
+		{{ question.vote_sum }}
+	</div>
+
+	<div class="re-num">
+		<i class="fa fa-reply"></i>
+		{{ question.answer_set.count() }}
+	</div>
+
+	<div class="favor-num">
+		<i class="fa fa-star"></i>
+		{{ question.favor_count }}
+	</div>
+
+	<div class="title">
+		<a href="{{ url('questions:QuestionDetail',args=[question.pk]) }}">{{ question.title|cut(25) }}</a>
+	</div>
+
+	<div class="author">
+		<a href="{{ url('accounts:profile',args=[question.creater.pk]) }}">{{ question.creater }}</a>
+	</div>
+</div>
+{% endfor %}
+
+{{macro.paginatior("questions:QuestionList",page,page_list,query=query_string,)}}
+
+
+{%endblock%}
+
+{%block sidebar%}
+
+{%endblock%}

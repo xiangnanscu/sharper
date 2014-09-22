@@ -1,0 +1,4 @@
+{% import 'macros.html' as macro %}
+{% for item in items %}
+	{{ macro.show_postitem(item,user) }}
+{% endfor %}

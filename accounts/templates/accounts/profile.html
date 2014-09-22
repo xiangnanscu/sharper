@@ -1,0 +1,107 @@
+{% extends "home.html" %}
+
+
+{% block content %}
+<div id="" class="col-sm-12 col-md-10">
+	<div class="row">
+    <div class="sorted-title">
+        <h3>{{ profile_user }}</h3>
+        <span class="tab-links pull-right">
+            {% if profile_user == request_user %}
+            <a href="{{ url('accounts:profile_edit',args=(profile_user.pk,)) }}">编辑档案</a> &nbsp; &nbsp
+            <a href="{{ url('accounts:password_change') }}">修改密码</a>
+            {% endif %}
+        </span>
+    </div>
+	<div id="basic-info" class="clearfix">
+		<div class="col-sm-12 col-md-7 ">
+			<div class="col-sm-3 padding-none">
+				<div class="gravatar-wrapper-128"><img class="img-responsive" src="{{ profile_user.avatar_url }}" alt=""></div>      
+				<div class="reputation text-success">
+					<span>{{ profile_user.reputation }}</span>
+					声望
+				</div>
+			</div>
+
+			<div class="col-sm-9 padding-none">
+				<table>
+					<tbody>
+						<tr>
+							<th>基本信息</th>
+							<td>城市</td>
+							<td class="tab adr">{{ profile_user.location }}</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>签名</td>
+							<td id="signature">{{ profile_user.signature }}</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<th>社区点滴</th>
+							<td>成员年龄</td>
+							<td class="cool" title="{{ profile_user.date_joined|strftime }}">{{ member_age|naturaltime|only_words }}</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>收到关心</td>
+							<td>{{ profile_user.huagee }}</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>收到拥抱</td>
+							<td>{{ profile_user.huagee }}</td>
+						</tr>
+					</tbody>
+					<tbody class="user-profile-stats">
+						<tr>
+							<th>数据</th>
+							<td>主页访问</td>
+							<td>{{ profile_user.viewed }}</td>
+						</tr>
+					</tbody>
+
+					{% if profile_user == request_user %}
+					<tbody>
+						<tr>
+							<th>信息</th>
+							<td>登录邮箱</td>
+							<td>{{ profile_user.email }}</td>
+						</tr>                      
+					</tbody>
+					{% endif %}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-5 padding-none">
+			<div id="self-discription" >{{ profile_user.description }}</div>
+		</div>
+	</div>
+<a name="tab-top"></a>
+    <div id="personal-bar" class="sorted-title">
+        <div class="tabs pull-left">
+            <a {% if tab == 'summary' %}class="youarehere"{% endif %} href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'summary'}) }}#tab-top" title="{{ display_username }}的概况">
+                概况
+            </a>
+            <a {% if tab == 'answers' %}class="youarehere"{% endif %} href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'answers'}) }}#tab-top" title="{{ display_username }}的回答">
+                回答
+            </a>
+            <a {% if tab == 'questions' %}class="youarehere"{% endif %} href="{{ url('accounts:profile_tab',kwargs={'user_pk':profile_user.pk,'tab':'questions'}) }}#tab-top" title="{{ display_username }}的提问">
+                提问
+            </a>
+        </div>
+    </div>
+
+{% if tab == 'summary' %}
+    {% include "accounts/profile_summary.html" %}
+{% elif tab == 'answers' %}
+    {% include "accounts/profile_answers.html" %}
+{% elif tab == 'questions' %}
+    {% include "accounts/profile_questions.html" %} 
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<div>
+    <div class="pull-right">
+        {%if action=='注册'%}<a class="login">有账号，登录</a>{%else%}<a class="register">注册新账号</a>{%endif%}&nbsp;&nbsp;
+    </div>
+    <div class="col-sm-9 col-xs-12 center-block">
+    <form id="auth-form" action="" method="POST" class="form-horizontal"> {{ csrf_token|csrf }}
+        {%include 'base_form.html' %}
+
+    <div class="form-submit">
+    <div class="help-link">
+    {%if action=="登录"%}
+    <a href="{{ url('accounts:password_reset') }}">忘记密码</a>
+    {%else%}
+    <span>请记住此密码</span>
+    {%endif%}
+    
+    </div>
+    <label for="submit" hidden="true" class="control-label">{{action}}</label>
+    <input type="submit" class="" value="{{action}}">
+    </div>
+    </form>
+    
+    
+    </div>
+</div>

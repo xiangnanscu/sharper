@@ -1,0 +1,44 @@
+{% import 'macros.html' as macro %}
+{%extends 'tr_home.html'%}
+
+{%block mainbar%} 
+
+{% if page==1 %}
+{{ macro.show_postitem(topic,user) }}
+{% endif %}
+
+<div  class="tabs-wrapper">
+	{% if page==1 %}
+	<div  class="tabs-info">
+		<h2>{{topic.reply_set.count()}}条回复</h2>
+	</div>
+	{% endif %}
+	<div  class="tabs">
+		{% set querys=view.get_query_string(False,'page','sort')%}
+		{% set turl=url('topics:TopicDetail',args=[topic.pk])%}
+		{% set csort=view.get_sort()%}
+		<a {% if csort=='votes'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=votes"  title="">
+			票数
+		</a>
+		<a  {% if csort=='newest'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=newest"  title="">
+			最新
+		</a>
+		<a  {% if csort=='active'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=active"  title="">
+			活动
+		</a>
+	</div>
+</div>
+
+{% for reply in object_list %}
+{{ macro.show_postitem(reply,user) }}
+{% endfor %}
+
+{{macro.paginatior("topics:TopicDetail",page,page_list,kwargs={'pk':topic.pk},query=query_string,)}}
+
+{%endblock%}
+
+{%block sidebar%}
+<!-- <div>这是一个相当优雅和小清新的网站</div>
+<div>你无法想象世界上竟有如此优雅和小清新的网站</div>
+<div>怎么办呢?</div> -->
+{%endblock%}

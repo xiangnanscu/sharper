@@ -1,0 +1,4 @@
+<form name="form.hoster_address" method="post">{{ csrf_token|csrf }}
+	{{ form.as_p() }}
+	<input name="form.self_address" type="submit" value="提交" />
+</form>

@@ -1,0 +1,44 @@
+{% import 'macros.html' as macro %}
+{%extends 'qa_home.html'%}
+
+{%block mainbar%} 
+
+{% if page==1 %}
+{{ macro.show_postitem(question,user) }}
+{% endif %}
+
+<div  class="tabs-wrapper">
+	{% if page==1 %}
+	<div  class="tabs-info">
+		<h2>{{question.answer_set.count()}}个回答</h2>
+	</div>
+	{% endif %}
+	<div  class="tabs">
+		{% set querys=view.get_query_string(False,'page','sort')%}
+		{% set qurl=url('questions:QuestionDetail',args=[question.pk])%}
+		{% set csort=view.get_sort()%}
+		<a {% if cort=='votes'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=votes"  title="">
+			票数
+		</a>
+		<a  {% if cort=='newest'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=newest"  title="">
+			最新
+		</a>
+		<a  {% if cort=='active'%}class="youarehere"{% endif %} href="{{qurl}}?{{querys}}&sort=active"  title="">
+			活动
+		</a>
+	</div>
+</div>
+
+{% for answer in object_list %}
+{{ macro.show_postitem(answer,user) }}
+{% endfor %}
+
+{{macro.paginatior("questions:QuestionDetail",page,page_list,kwargs={'pk':question.pk},query=query_string,)}}
+
+{%endblock%}
+
+{%block sidebar%}
+<!-- <div>这是一个相当优雅和小清新的网站</div>
+<div>你无法想象世界上竟有如此优雅和小清新的网站</div>
+<div>怎么办呢?</div> -->
+{%endblock%}

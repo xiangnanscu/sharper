@@ -1,0 +1,13 @@
+
+{%extends 'qa_home.html'%}
+
+{%block mainbar%}
+<form action="{{url('answers:CommentUpdate',kwargs={'pk':view.kwargs['pk']})}}" method="post">{{ csrf_token|csrf }}
+	{{ form.as_p() }}
+	<input type="submit" value="提交" />
+</form>
+{%endblock%}
+
+{%block sidebar%}
+右边框
+{%endblock%}

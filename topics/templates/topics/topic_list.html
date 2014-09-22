@@ -1,0 +1,56 @@
+{%extends 'tr_home.html'%}
+
+{%block mainbar%}
+
+<div  class="tabs-wrapper">
+  <div  class="tabs">
+	{% set querys=view.get_query_string(False,'page','sort')%}
+	{% set turl=url('topics:TopicList')%}
+	{% set csort=view.get_sort()%}
+		<a {% if csort=='votes'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=votes"  title="">
+			票数
+		</a>
+		<a  {% if csort=='newest'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=newest"  title="">
+			最新
+		</a>
+		<a  {% if csort=='active'%}class="youarehere"{% endif %} href="{{turl}}?{{querys}}&sort=active"  title="">
+			活动
+		</a>
+  </div>
+</div>
+
+{% for topic in object_list %}
+<div class="post-list">
+
+	<div class="vote-num">
+		<i class="fa fa-sort"></i>
+		{{ topic.vote_sum }}
+	</div>
+
+	<div class="re-num">
+		<i class="fa fa-reply"></i>
+		{{ topic.reply_set.count() }}
+	</div>
+
+	<div class="favor-num">
+		<i class="fa fa-star"></i>
+		{{ topic.favor_count }}
+	</div>
+
+	<div class="title">
+		<a href="{{ url('topics:TopicDetail',args=[topic.pk]) }}">{{ topic.title|cut(25) }}</a>
+	</div>
+
+	<div class="author">
+		<a href="{{ url('accounts:profile',args=[topic.creater.pk]) }}">{{ topic.creater }}</a>
+	</div>
+</div>
+{% endfor %}
+
+{{macro.paginatior("topics:TopicList",page,page_list,query=query_string,)}}
+
+{%endblock%}
+
+{%block sidebar%}
+
+{%endblock%}
